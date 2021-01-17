@@ -10,7 +10,7 @@ import java.util.List;
 public interface TaskRepo extends JpaRepository<Task, Long> {
 
     @Query(
-            value = "SELECT * FROM Task",
+            value = "SELECT t FROM Task t",
             nativeQuery = true)
     List<Task> findTasksForCurrentUser(@Param("id") final Long id);
 }

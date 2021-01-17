@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.domain.Task;
 import ua.com.service.TaskService;
+import ua.com.service.UserService;
 
 import java.security.Principal;
 
@@ -16,10 +17,12 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/tasks")
     public String main(Model model, Principal principal){
-        model.addAttribute("tasks", taskService.findTasksForCurrentUser(principal));
+       // model.addAttribute("tasks", taskService.findTasksForCurrentUser(principal));
         return "tasks";
     }
 

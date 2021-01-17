@@ -19,13 +19,13 @@ public class NoteController {
     private NoteService noteService;
 
     @GetMapping("/notes")
-    public String main(Model model, Principal principal) {
+    public String main(Model model, Principal principal) throws Exception {
         model.addAttribute("note", noteService.findTodaysNoteForCurrentUser(principal));
         return "notes";
     }
 
     @PostMapping("/notes")
-    public String add(@ModelAttribute Note note, Principal principal) {
+    public String add(@ModelAttribute Note note, Principal principal) throws Exception {
         noteService.addTodaysNote(note, principal);
         return "redirect:/notes";
     }

@@ -40,7 +40,7 @@ public class NoteService {
     public Note findTodaysNoteForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
         List<Note> notesFroCurrentUser = noteRepo.findNotesFroCurrentUser(user.getId());
-        return notesFroCurrentUser.stream().filter(this::filterForCurrentDate).findAny().get();
+        return notesFroCurrentUser.stream().filter(this::filterForCurrentDate).findAny().orElse(null);
     }
 
     private boolean filterForCurrentDate(final Note note)

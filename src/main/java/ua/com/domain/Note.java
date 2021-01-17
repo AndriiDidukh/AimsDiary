@@ -1,7 +1,5 @@
 package ua.com.domain;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.Date;
 

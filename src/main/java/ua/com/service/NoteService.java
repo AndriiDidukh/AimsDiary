@@ -43,7 +43,7 @@ public class NoteService {
         try
         {
             List<Note> notesFroCurrentUser = noteRepo.findNotesFroCurrentUser(user.getId());
-            return notesFroCurrentUser.stream().filter(this::filterForCurrentDate).findFirst().orElse(null);
+            return notesFroCurrentUser.stream().filter(this::filterForCurrentDate).findAny().get();
         }
         catch (Exception e)
         {

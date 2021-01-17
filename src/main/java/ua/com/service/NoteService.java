@@ -22,7 +22,7 @@ public class NoteService {
     @Autowired
     private UserRepo userRepo;
 
-    public void addTodaysNote(final Note note, final Principal principal) throws Exception {
+    public void addTodaysNote(final Note note, final Principal principal){
         Note todaysNoteForCurrentUser = findTodaysNoteForCurrentUser(principal);
         if(nonNull(todaysNoteForCurrentUser))
         {
@@ -36,21 +36,13 @@ public class NoteService {
         }
 
     }
-    
-    public Note findTodaysNoteForCurrentUser(final Principal principal) throws Exception {
+
+    public Note findTodaysNoteForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
-        List<Note> notesFroCurrentUser;
-        try
-        {
-            notesFroCurrentUser = noteRepo.findNotesFroCurrentUser(user.getId());
-        }
-        catch (Exception e)
-        {
-            throw new Exception("lol");
-        }
+        List<Note> notesFroCurrentUser = noteRepo.findNotesFroCurrentUser(user.getId());
         return notesFroCurrentUser.stream().filter(this::filterForCurrentDate).findAny().get();
     }
-    
+
     private boolean filterForCurrentDate(final Note note)
     {
         return DateUtil.compareDateToCurrentDateToTheDay(note.getDate());

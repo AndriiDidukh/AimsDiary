@@ -10,7 +10,7 @@ import java.util.List;
 public interface NoteRepo extends JpaRepository<Note, Long> {
 
     @Query(
-            value = "SELECT * FROM Note n WHERE n.author_id =:id",
+            value = "SELECT * FROM Note",
             nativeQuery = true)
     List<Note> findNotesFroCurrentUser(@Param("id") final Long id);
 }

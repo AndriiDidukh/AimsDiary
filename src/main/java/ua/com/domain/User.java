@@ -23,6 +23,8 @@ public class User implements UserDetails {
 
     @OneToMany
     private List<Note> dailyNotes;
+    @OneToMany
+    private List<Task> tasks;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -116,5 +118,13 @@ public class User implements UserDetails {
 
     public void setDailyNotes(List<Note> dailyNotes) {
         this.dailyNotes = dailyNotes;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

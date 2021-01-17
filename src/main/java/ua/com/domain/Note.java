@@ -16,7 +16,6 @@ public class Note {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "dailyNotes")
     private User author;
 
     public Long getId() {

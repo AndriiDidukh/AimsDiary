@@ -26,8 +26,6 @@ public class TaskService {
 
     public void addTask(Task task, Principal principal)
     {
-        final User user = userRepo.findByUsername(principal.getName());
-        task.setAuthor(user);
         taskRepo.save(task);
     }
 }

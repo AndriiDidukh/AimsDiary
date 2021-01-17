@@ -10,8 +10,7 @@ public class Task {
     private Long id;
 
     private String text;
-    @ManyToOne
-    private User author;
+
 
     public Long getId() {
         return id;
@@ -29,11 +28,4 @@ public class Task {
         this.text = text;
     }
 
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
 }

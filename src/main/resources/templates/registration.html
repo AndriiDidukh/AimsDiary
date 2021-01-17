@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/static/css/styles.css" >
+</head>
+<body>
+<div class="container main">
+    <div class="row">
+        <div class="col-xs-12 picture">
+            <img src = "/static/images/1.jpg" width="100%">
+        </div>
+        <div class="col-xs-o col-ms-0 col-md-0 col-lg-1"></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 singin">
+            <form class="box" th:action="@{/registration}" method="post">
+                <h1>Registration</h1>
+                <div><input type="text" name="username" placeholder="Login"/></div>
+                <div><input type="password" name="password" placeholder="Password"/></div>
+                <div><input type="text" name="name" placeholder="Name"/></div>
+                <div><input type="text" name="surname" placeholder="Surname"/></div>
+                <div><input type="submit" value="Registrate"/></div>
+                <p><a href="/login">Sing In</a></p>
+            </form>
+        </div>
+        <div class="col-xs-o col-ms-0 col-md-0 col-lg-1"></div>
+    </div>
+
+
+</div>
+</body>
+</html>

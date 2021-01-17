@@ -1,0 +1,299 @@
+body {
+    margin: 0;
+    padding: 0; 
+    font-family: sans-serif;
+    background: black;
+}
+
+.box {
+    text-align: center;
+    background: black;
+    width: 100%;
+    padding: 40px;
+    border-radius: 25px;
+    margin-top: 10%;
+}
+
+
+.box2 {
+    text-align: center;
+    background: black;
+    width: 100%;
+    height: 100vh;
+    margin-top: 5px;
+    border-radius: 25px;
+}
+
+.box input[type="text"], .box input[type="password"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    width: 60%;
+    padding: 14px 20px;
+    border: 3px solid #3498db;
+    text-align: center;
+    color: white;
+    border-radius: 24px;
+    outline: none;
+    transition: 0.25s;
+}
+
+.box input[type="text"]:focus, .box input[type="password"]:focus {
+    border-color: #2ecc71;
+    width: 85%;
+}
+
+.box input[type="submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    width: 25%;
+    padding: 14px 20px;
+    border: 3px solid #2ecc71;
+    text-align: center;
+    color: white;
+    border-radius: 24px;
+    outline: none;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+
+.picture {
+    width: 100%;
+    border-bottom: 3px solid black;
+}
+
+.color {
+    background: black;
+    padding: 0;
+    margin: 0;
+    border: none !important;
+}
+
+
+.main {
+    height: 100vh;
+    background: #fafad2;
+    position: relative;
+}
+
+.singin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.test{
+    width: 100%;
+    height: 30px;
+    background: red;
+}
+
+.border {
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    border: 3px solid #3498db;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+
+.border:hover {
+    background: green;
+}
+
+.border a {
+    color: white!important;
+}
+
+.hello {
+    margin-top: 9px;
+    color: white!important;
+    font-size: 25px;
+    text-transform: capitalize;
+}
+
+.lol {
+    margin-top: 25px;
+}
+
+
+nav {
+    width: 100%;
+    background: green;
+    height: 70px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.ulmenu{
+    margin-top: 15px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0;
+}
+
+ul.list {
+    list-style-type: none;
+    padding: 0;
+    width: 250px;
+}
+
+ul.contact {
+    list-style-type: none;
+    padding: 0;
+    width: 300px;
+}
+
+ul.contact li {
+    vertical-align: middle;
+}
+
+ul.list li a{
+    font-size: 25px;
+    color: greenyellow;
+    text-decoration: none;
+}
+
+ul.list li {
+    border-top: dashed 1px grey;
+    border-bottom: dashed 1px grey;
+    width: 250px;
+    display: block;
+}
+
+.container {
+    width: 100%;
+}
+
+.sidebar {
+    position: fixed;
+    width: 250PX;
+    background-color: black;
+    height: 100vh;
+}
+
+.back {
+    position: fixed;
+    left: 10px;
+    bottom: 30px;
+    font-size: 30px;
+}
+
+.back a {
+    color: white;
+    text-decoration: none;
+    padding-bottom: 1px;
+}
+
+
+.content {
+    margin-left: 250px;
+    max-width: 900px;
+    vertical-align: top;
+    padding: 40px;
+    font-size: 23px;
+}
+
+
+.photoContainer {
+    padding: 30px 0;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: solid 2px white;
+}
+.logo {
+    width: 30px;
+    height: 30px;
+    padding: 10px 10px 0px 40px;
+    vertical-align: center;
+}
+
+.education {
+    width: 100%;
+    position: relative;
+}
+
+.lineCover {
+    position: relative;
+}
+
+.line {
+    width:5px;
+    background-color:green;
+    position:absolute;
+    top:10px;
+    bottom:0;
+    left:40px;
+}
+
+.year {
+    position: absolute;
+    display: inline-block;
+    padding: 5px;
+    z-index: 2;
+    width: 40px;
+    height: 30px;
+    background-color: white;
+    vertical-align: center;
+
+}
+
+.place {
+    padding-left: 100px;
+    display: inline-block;
+    background-color: silver;
+    border-radius: 20px;
+    margin: 0px 20px 40px 100px;
+    padding: 10px;
+}
+
+
+
+.green {
+    color: green;
+}
+
+
+.fullWidth {
+    width: 100%;
+}
+
+
+.inlineBlock {
+    width: 70%;
+    display: inline-block;
+}
+
+.note {
+    width: 90%;
+    height: 70vh;
+;
+}
+
+
+
+
+
+

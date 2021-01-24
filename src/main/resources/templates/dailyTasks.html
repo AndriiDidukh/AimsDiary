@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="container main">
+<div class="container min-height">
 
     <div class="sidebar">
         <div class="photoContainer">
@@ -67,13 +67,13 @@
                 </tr>
                 <tbody th:each="task : ${dailyTasks}" th:remove="tag">
                 <tr>
-                    <td th:text="${task.text}" class="daily-task-text"></td>
-                    <td th:text="${task.startDate}"></td>
-                    <td th:text="${task.endDate}"></td>
-                    <td>
+                    <td class="daily-task-text" th:text="${task.text}"></td>
+                    <td class="daily-task-start-date-value" th:text="${task.startDate}"></td>
+                    <td class="daily-task-end-date-value" th:text="${task.endDate}"></td>
+                    <td class="daily-task-edit">
                         <a th:href="@{/edit/daily/task/{id}(id=${task.id})}" class="edit-link">Edit</a>
                     </td>
-                    <td>
+                    <td class="daily-task-delete">
                         <form th:action="@{/delete/daily/task}" method="post">
                             <input type="hidden" th:value="${task.id}" name="id"/>
                             <input type="submit" value="Delete" class="delete-button"/>

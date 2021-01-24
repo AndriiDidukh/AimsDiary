@@ -72,8 +72,8 @@ body {
     position: relative;
 }
 
-.main2 {
-    background: white !important;
+.min-height {
+    background: white;
     position: relative;
     min-height: 100vh;
 }
@@ -334,6 +334,37 @@ ul.list li {
     text-decoration: none;
     color: black;
     transition: 0.4s;
+}
+
+.daily-task-text {
+    width: 50%;
+}
+
+.daily-task-start-date {
+    width: 15%;
+}
+
+.daily-task-end-date {
+    width: 15%;
+}
+
+.daily-task-edit {
+    width: 10%;
+}
+
+.daily-task-delete {
+    width: 10%;
+}
+
+.daily-task-start-date-value {
+    width: 15%;
+    font-size: 20px;
+}
+
+.daily-task-end-date-value {
+    width: 15%;
+    font-size: 20px;
+
 }
 
 

@@ -7,9 +7,9 @@ import ua.com.domain.Note;
 
 import java.util.List;
 
-public interface NoteRepo extends JpaRepository<Note, Long> {
+public interface NoteRepo extends JpaRepository<Note, Integer> {
 
     @Query(
-            value = "SELECT n FROM Note n")
-    List<Note> findNotesFroCurrentUser(@Param("id") final Long id);
+            value = "SELECT n FROM Note n WHERE n.author.id=:id")
+    List<Note> findNotesFroCurrentUser(@Param("id") final int id);
 }

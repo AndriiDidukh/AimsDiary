@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0; 
@@ -12,16 +16,6 @@ body {
     padding: 40px;
     border-radius: 25px;
     margin-top: 10%;
-}
-
-
-.box2 {
-    text-align: center;
-    background: black;
-    width: 100%;
-    height: 100vh;
-    margin-top: 5px;
-    border-radius: 25px;
 }
 
 .box input[type="text"], .box input[type="password"]{
@@ -72,18 +66,16 @@ body {
     border-bottom: 3px solid black;
 }
 
-.color {
-    background: black;
-    padding: 0;
-    margin: 0;
-    border: none !important;
-}
-
-
 .main {
     height: 100vh;
-    background: #fafad2;
+    background: white;
     position: relative;
+}
+
+.main2 {
+    background: white !important;
+    position: relative;
+    min-height: 100vh;
 }
 
 .singin {
@@ -91,12 +83,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.test{
-    width: 100%;
-    height: 30px;
-    background: red;
 }
 
 .border {
@@ -123,29 +109,12 @@ body {
     text-transform: capitalize;
 }
 
-.lol {
-    margin-top: 25px;
-}
-
-
 nav {
     width: 100%;
     background: green;
     height: 70px;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-}
-
-.ulmenu{
-    margin-top: 15px;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body{
-    margin: 0;
 }
 
 ul.list {
@@ -188,20 +157,6 @@ ul.list li {
     height: 100vh;
 }
 
-.back {
-    position: fixed;
-    left: 10px;
-    bottom: 30px;
-    font-size: 30px;
-}
-
-.back a {
-    color: white;
-    text-decoration: none;
-    padding-bottom: 1px;
-}
-
-
 .content {
     margin-left: 250px;
     max-width: 900px;
@@ -209,7 +164,6 @@ ul.list li {
     padding: 40px;
     font-size: 23px;
 }
-
 
 .photoContainer {
     padding: 30px 0;
@@ -230,67 +184,160 @@ ul.list li {
     vertical-align: center;
 }
 
-.education {
-    width: 100%;
-    position: relative;
-}
-
-.lineCover {
-    position: relative;
-}
-
-.line {
-    width:5px;
-    background-color:green;
-    position:absolute;
-    top:10px;
-    bottom:0;
-    left:40px;
-}
-
-.year {
-    position: absolute;
-    display: inline-block;
-    padding: 5px;
-    z-index: 2;
-    width: 40px;
-    height: 30px;
-    background-color: white;
-    vertical-align: center;
-
-}
-
-.place {
-    padding-left: 100px;
-    display: inline-block;
-    background-color: silver;
-    border-radius: 20px;
-    margin: 0px 20px 40px 100px;
-    padding: 10px;
-}
-
-
-
 .green {
     color: green;
 }
 
+.note {
+    width: 100%;
+    height: 65vh;
+    border-radius: 10px;
+    border: 2px solid greenyellow;
+}
 
-.fullWidth {
+.taskTable {
+    width: 100%;
+    border: solid 4px greenyellow;
+    border-radius: 25px;
+}
+
+.taskRow {
+    border-bottom: blue;
+    padding: 25px;
+}
+
+.taskText {
+    width: 50%;
+}
+
+.taskDate {
+    width: 20%;
+}
+
+.taskEdit {
+    width: 15%;
+}
+
+.taskDelete {
+    width: 15%;
+}
+
+.submitButton {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border: solid 2px greenyellow;
+    border-radius: 20px;
+}
+
+.submitButton:hover {
+    color: greenyellow;
+    transition: 0.4s;
+}
+
+.note-select {
+    margin-right: 3px;
+    background-color: black;
+    color: white;
+    border: 2px solid greenyellow !important;
+    border-radius: 10px 10px 0 0 !important;
+    width: 100% !important;
+}
+
+.note-select-li {
+    width: 32%;
+    margin-right: 2px;
+    height: 50px;
+}
+
+.note-select:hover {
+    color: greenyellow;
+    transition: 0.4s;
+}
+
+.add-task-header {
+    text-align: center;
+    color: black;
+}
+
+#text {
+    width: 100%;
+    border: 4px solid black;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.main-page-table {
+    width: 100%;
+    border: 3px solid greenyellow;
+    border-radius: 55px !important;
+}
+
+.main-task-text {
+    width: 75%;
+    padding-left: 15px;
+}
+
+.main-task-status {
+    width: 24%;
+}
+
+.main-table-row {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.green-yellow {
+    color: greenyellow;
+}
+
+.main-task-button {
+    background-color: greenyellow;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+}
+
+.delete-button:hover {
+    color: black;
+    transition: 0.4s;
+}
+
+.edit-task {
+    background-color: greenyellow;
+    color: white;
+}
+
+.date-input {
     width: 100%;
 }
 
-
-.inlineBlock {
-    width: 70%;
-    display: inline-block;
+.edit-link {
+    width: 100%;
+    background-color: greenyellow;
+    height: 100%;
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    border: 2px solid black;
 }
 
-.note {
-    width: 90%;
-    height: 70vh;
-;
+.edit-link:hover {
+    text-decoration: none;
+    color: black;
+    transition: 0.4s;
 }
+
+
+
 
 
 

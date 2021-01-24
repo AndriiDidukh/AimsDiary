@@ -22,19 +22,16 @@ public class NoteService {
     @Autowired
     private UserRepo userRepo;
 
-    public void addTodaysNote(final Note note, final Principal principal){
+    public void addTodaysNote(final Note note, final Principal principal) {
         Note todaysNoteForCurrentUser = findTodaysNoteForCurrentUser(principal);
-        if(nonNull(todaysNoteForCurrentUser))
-        {
+        if (nonNull(todaysNoteForCurrentUser)) {
             todaysNoteForCurrentUser.setText(note.getText());
             noteRepo.save(todaysNoteForCurrentUser);
-        }
-        else {
+        } else {
             note.setDate(new Date());
             note.setAuthor(userRepo.findByUsername(principal.getName()));
             noteRepo.save(note);
         }
-
     }
 
     public Note findTodaysNoteForCurrentUser(final Principal principal) {
@@ -43,9 +40,13 @@ public class NoteService {
         return notesFroCurrentUser.stream().filter(this::filterForCurrentDate).findAny().orElse(null);
     }
 
-    private boolean filterForCurrentDate(final Note note)
-    {
-        return DateUtil.compareDateToCurrentDateToTheDay(note.getDate());
+    public List<Note> findAllNotesForCurrentUser(final Principal principal) {
+        final User user = userRepo.findByUsername(principal.getName());
+        return noteRepo.findNotesFroCurrentUser(user.getId());
+    }
+
+    private boolean filterForCurrentDate(final Note note) {
+        return DateUtil.compareDatesToTheDay(new Date(), note.getDate());
     }
 }
 

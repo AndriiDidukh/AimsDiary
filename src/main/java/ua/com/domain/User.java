@@ -13,7 +13,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private boolean active;
@@ -24,17 +24,31 @@ public class User implements UserDetails {
     @OneToMany
     private List<Note> dailyNotes;
 
+    @OneToMany
+    private List<Task> tasks;
+
+    @OneToMany
+    private List<Task> dailyTasks;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public String getUsername() {
@@ -118,4 +132,11 @@ public class User implements UserDetails {
         this.dailyNotes = dailyNotes;
     }
 
+    public List<Task> getDailyTasks() {
+        return dailyTasks;
+    }
+
+    public void setDailyTasks(List<Task> dailyTasks) {
+        this.dailyTasks = dailyTasks;
+    }
 }

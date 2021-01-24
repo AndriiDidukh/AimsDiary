@@ -1,17 +1,22 @@
 package ua.com.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Note {
+public class DailyTask {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(columnDefinition = "TEXT")
     private String text;
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
     @ManyToOne
     private User author;
@@ -32,12 +37,21 @@ public class Note {
         this.text = text;
     }
 
-    public Date getDate() {
-        return date;
+
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public User getAuthor() {

@@ -3,9 +3,8 @@ package ua.com.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import ua.com.domain.DailyTask;
 import ua.com.domain.Task;
 import ua.com.service.TaskService;
 import ua.com.service.UserService;
@@ -21,14 +20,30 @@ public class TaskController {
     private UserService userService;
 
     @GetMapping("/tasks")
-    public String main(Model model, Principal principal){
-       // model.addAttribute("tasks", taskService.findTasksForCurrentUser(principal));
+    public String getTasks(Model model, final Principal principal){
+        model.addAttribute("tasks", taskService.findTasksForCurrentUser(principal));
+        model.addAttribute("futureTasks", taskService.getFutureTasksForCurrentUser(principal));
+        model.addAttribute("pastTasks", taskService.getPastTasksForCurrentUser(principal));
         return "tasks";
     }
 
     @PostMapping("/tasks")
-    public String add(@ModelAttribute Task task, Principal principal){
+    public String addTask(@ModelAttribute Task task, final Principal principal){
         taskService.addTask(task, principal);
         return "redirect:/tasks";
+    }
+
+
+    @PostMapping("/delete/task")
+    public String deleteTask(@RequestParam int id)
+    {
+        taskService.deleteTask(id);
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/edit/task/{id}")
+    public String editTask(@PathVariable String id, Model model) {
+        model.addAttribute("task", taskService.findTaskById(id));
+        return "editTask";
     }
 }

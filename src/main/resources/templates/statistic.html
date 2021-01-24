@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Daily Tasks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+<div class="container main">
+    <div class="sidebar">
+        <div class="photoContainer">
+            <img src="/static/images/2.png" class="photo">
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="/">Main</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/daily/tasks">Daily Tasks</a></li>
+                <li><a href="/yearly/tasks">Yearly Tasks</a></li>
+                <li><a href="/statistic">Statistic</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">-->
+                        <input type="submit" value="Log Out"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="col-xs-12 picture">
+            <img src="/static/images/1.jpg" width="100%">
+        </div>
+    </div>
+</div>
+<!-- Some more stuff here -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

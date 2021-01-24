@@ -2,57 +2,110 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
 
-<div class="container main">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-            <div class="container">
-                <div class="sidebar">
-                    <div class="photoContainer">
-                        <img src="/static/images/2.png" class="photo">
-                    </div>
-                    <div class="menu">
-                        <ul class="list">
-                            <li><a href="/notes">Notes</a></li>
-                            <li><a href="/tasks">Tasks</a></li>
-                            <li><a href="#experience">Additional Tasks</a></li>
-                            <li><a href="#skils">Skils</a></li>
-                            <li><a href="#contacts">Statistic</a></li>
-                            <li><a href="#feedbacks">Setting</a></li>
-                        </ul>
-                    </div>
-                    <p class="back">
+<div class="container main2">
+    <div class="sidebar">
+        <div class="photoContainer">
+            <img src="/static/images/2.png" class="photo">
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="/">Main</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/daily/tasks">Daily Tasks</a></li>
+                <li><a href="/yearly/tasks">Yearly Tasks</a></li>
+                <li><a href="/statistic">Statistic</a></li>
+                <li>
                     <form th:action="@{/logout}" method="post">-->
                         <input type="submit" value="Log Out"/>
                     </form>
-                    </p>
-                </div>
-                <div class="content">
-
-
-                    <h3>Add task</h3>
-                    <form th:action="@{/tasks}" method="post">
-                        <p><textarea type="text" name="text" class="task"></textarea></p>
-                        <p><input type="submit" value="Submit"/></p>
-                    </form>
-<!--                    <h3>Tasks</h3>-->
-<!--                    <table>-->
-<!--                        <tr>-->
-<!--                            <th>NAME</th>-->
-<!--                        </tr>-->
-<!--                        <tr th:each="task : ${tasks}">-->
-<!--                            <td th:text="${task.text}">text</td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-                </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="col-xs-12 picture">
+            <img src="/static/images/1.jpg" width="100%">
+        </div>
+        <h2 class="add-task-header"><b>Add Task</b></h2>
+        <form th:action="@{/tasks}" method="post">
+            <p>
+                <input type="text" name="text" class="task" id="text" placeholder=" Enter name of your task">
+            </p>
+            <p class="text-center">
+                <label for="taskDate">Select date for task:</label><br>
+                <input type="date" id="taskDate" name="taskDate" class="task">
+            </p>
+            <p>
+                <input type="submit" value="Submit" class="submitButton"/>
+            </p>
+        </form>
+        <hr>
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab1" role="tab" data-toggle="pill">Future tasks</a>
+                </li>
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab2" role="tab" data-toggle="pill">Past tasks</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <table class="taskTable">
+                    <tr>
+                        <td class="taskText"><b>Task</b></td>
+                        <td class="taskDate"><b>Date</b></td>
+                        <td class="taskEdit"><b>Edit</b></td>
+                        <td class="taskDelete"><b>Delete</b></td>
+                    </tr>
+                    <tbody th:each="task : ${futureTasks}" th:remove="tag">
+                    <tr class="taskRow">
+                        <td th:text="${task.text}" class="taskText"></td>
+                        <td th:text="${task.date}" class="taskDate"></td>
+                        <td class="taskEdit">
+                            <a th:href="@{/edit/task/{id}(id=${task.id})}" class="edit-link">Edit</a>
+                        </td>
+                        <td class="taskDelete">
+                            <form th:action="@{/delete/task}" method="post">
+                                <input type="hidden" th:value="${task.id}" name="id"/>
+                                <input type="submit" value="Delete" class="delete-button"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
+            <div role="tabpanel" class="tab-pane" id="tab2">
+                <table class="taskTable">
+                    <tr>
+                        <td class="taskText"><b>Task</b></td>
+                        <td class="taskDate"><b>Date</b></td>
+                        <td class="taskEdit"><b>Status</b></td>
+                        <td class="taskDelete"><b>Delete</b></td>
+                    </tr>
+                    <tbody th:each="task : ${pastTasks}" th:remove="tag">
+                    <tr>
+                        <td th:text="${task.text}"></td>
+                        <td th:text="${task.date}"></td>
+                        <td th:text="${task.done}"></td>
+                        <td>
+                            <form th:action="@{/delete/task}" method="post">
+                                <input type="hidden" th:value="${task.id}" name="id"/>
+                                <input type="submit" value="Delete" class="delete-button"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -60,7 +113,5 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 </body>
 </html>

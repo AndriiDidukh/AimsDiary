@@ -1,13 +1,13 @@
 package ua.com.controller;
 
-import ua.com.domain.Role;
-import ua.com.domain.User;
-import ua.com.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import ua.com.domain.Role;
+import ua.com.domain.User;
+import ua.com.repos.UserRepo;
 
 import java.util.Collections;
 

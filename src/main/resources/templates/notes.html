@@ -1,66 +1,72 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Hello World!</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="/static/css/styles.css">
-    </head>
-    <body>
+<head>
+    <title>Notes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
 
-    <div class="container main">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                <div class="container">
-                    <div class="sidebar">
-                        <div class="photoContainer">
-                            <img src = "/static/images/2.png" class="photo">
-                        </div>
-                        <div class="menu">
-                            <ul class="list">
-                                <li><a href="/notes">Notes</a></li>
-                                <li><a href="/tasks">Tasks</a></li>
-                                <li><a href="#experience">Additional Tasks</a></li>
-                                <li><a href="#skils">Skils</a></li>
-                                <li><a href="#contacts">Statistic</a></li>
-                                <li><a href="#feedbacks">Setting</a></li>
-                            </ul>
-                        </div>
-                        <p class="back">
-                        <form th:action="@{/logout}" method="post">-->
-                            <input type="submit" value="Log Out"/>
-                        </form>
-                        </p>
-                    </div>
-                    <div class="content">
-                        <div class="container">
-                            <ul class="nav nav-pills" role="tablist">
-                                <li><a class="active" href="#tab1" role="tab" data-toggle="pill">Add Today`s Note</a> </li>
-                                <li><a href="#tab2" role="tab" data-toggle="pill">See All Notes</a> </li>
-                                <li><a href="#tab3" role="tab" data-toggle="pill">Calendar Notes</a> </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="tab1">
-                                <form th:action="@{/notes}" method="post">
-                                    <p><textarea type="text" name="text" class="note" >[[${note?.text}]]</textarea></p>
-                                    <p><input type="submit" value="Submit" /></p>
-                                </form>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="tab2">asdasdasdasd222222222222222</div>
-                            <div role="tabpanel" class="tab-pane" id="tab3">asdasdasaaaaasa213123dasd</div>
-                        </div>
-                    </div>
-                </div>
+<div class="container main">
+    <div class="sidebar">
+        <div class="photoContainer">
+            <img src="/static/images/2.png" class="photo">
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="/">Main</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/daily/tasks">Daily Tasks</a></li>
+                <li><a href="/yearly/tasks">Yearly Tasks</a></li>
+                <li><a href="/statistic">Statistic</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">-->
+                        <input type="submit" value="Log Out"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="col-xs-12 picture">
+            <img src="/static/images/1.jpg" width="100%">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab1" role="tab" data-toggle="tab">Add Today`s Note</a>
+                </li>
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab2" role="tab" data-toggle="tab">Calendar Notes</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <form th:action="@{/notes}" method="post">
+                    <p><textarea type="text" name="text" class="note">[[${note?.text}]]</textarea></p>
+                    <p><input type="submit" value="Save Note" class="submitButton"/></p>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab2">
+                <h2>Select Date of your Note</h2>
 
             </div>
         </div>
     </div>
     <!-- Some more stuff here -->
-    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="     crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-    </body>
+    <script>
+        $(document).ready(function (e) {
+            e.stopImmediatePropagation();
+            $('.nav li').removeClass('active');
+        });
+    </script>
+</body>
 </html>

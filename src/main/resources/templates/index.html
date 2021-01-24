@@ -2,53 +2,99 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Aims Diary</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <div class="container main">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-            <div class="container">
-                <div class="sidebar">
-                    <div class="photoContainer">
-                        <img src="/static/images/2.png" class="photo">
-                    </div>
-                    <div class="menu">
-                        <ul class="list">
-                            <li><a href="/notes">Notes</a></li>
-                            <li><a href="/tasks">Tasks</a></li>
-                            <li><a href="#experience">Additional Tasks</a></li>
-                            <li><a href="#skils">Skils</a></li>
-                            <li><a href="#contacts">Statistic</a></li>
-                            <li><a href="#feedbacks">Setting</a></li>
-                        </ul>
-                    </div>
-                    <p class="back">
+    <div class="sidebar">
+        <div class="photoContainer">
+            <img src="/static/images/2.png" class="photo">
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="/">Main</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/daily/tasks">Daily Tasks</a></li>
+                <li><a href="/yearly/tasks">Yearly Tasks</a></li>
+                <li><a href="/statistic">Statistic</a></li>
+                <li>
                     <form th:action="@{/logout}" method="post">-->
                         <input type="submit" value="Log Out"/>
                     </form>
-                    </p>
-                </div>
-                <div class="content">
-
-                </div>
-            </div>
-
+                </li>
+            </ul>
         </div>
     </div>
-</div>
-<!-- Some more stuff here -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<body>
-<!--<h1 th:inline="text">Hello [[${user.name}]] [[${user.surname}]]</h1>-->
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Sign Out"/>-->
-<!--</form>-->
-<!--<p><a href="/notes">NOTES</a> </p>-->
-</body>
+    <div class="content">
+        <div class="col-xs-12 picture">
+            <img src="/static/images/1.jpg" width="100%">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab1" role="tab" data-toggle="pill">Today`s tasks</a>
+                </li>
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab2" role="tab" data-toggle="pill">Yesterday tasks</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <table class="main-page-table">
+                    <tr class="main-table-row">
+                        <td class="main-task-text"><b> Task</b></td>
+                        <td class="main-task-status text-center"><b>Status</b></td>
+                    </tr>
+                    <tbody th:each="task : ${todayTasks}" th:remove="tag">
+                    <tr class="main-table-row">
+                        <td th:text="${task.text}" class="main-task-text"></td>
+                        <td th:if="${task.isDone()}" class="main-task-status text-center green-yellow">Finished</td>
+                        <td th:if="${!task.isDone()}" class="main-task-status text-center">
+                            <form th:action="@{/done}" method="post">
+                                <input type="hidden" th:value="${task.id}" name="id"/>
+                                <input type="submit" value="Done" class="main-task-button"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab2">
+                <table class="main-page-table">
+                    <tr class="main-table-row">
+                        <td class="main-task-text"><b> Task</b></td>
+                        <td class="main-task-status text-center"><b>Status</b></td>
+                    </tr>
+                    <tbody th:each="task : ${yesterdayTasks}" th:remove="tag">
+                    <tr class="main-table-row">
+                        <td th:text="${task.text}" class="main-task-text"></td>
+                        <td th:if="${task.isDone()}" class="main-task-status text-center green-yellow">Finished</td>
+                        <td th:if="${!task.isDone()}" class="main-task-status text-center">
+                            <form th:action="@{/done}" method="post">
+                                <input type="hidden" th:value="${task.id}" name="id"/>
+                                <input type="submit" value="Done" class="main-task-button"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Some more stuff here -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <body>
+    <!--<h1 th:inline="text">Hello [[${user.name}]] [[${user.surname}]]</h1>-->
+    <!--<form th:action="@{/logout}" method="post">-->
+    <!--    <input type="submit" value="Sign Out"/>-->
+    <!--</form>-->
+    <!--<p><a href="/notes">NOTES</a> </p>-->
+    </body>
 </html>

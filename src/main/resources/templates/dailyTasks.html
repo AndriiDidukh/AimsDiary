@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Daily Tasks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+<div class="container main">
+
+    <div class="sidebar">
+        <div class="photoContainer">
+            <img src="/static/images/2.png" class="photo">
+        </div>
+        <div class="menu">
+            <ul class="list">
+                <li><a href="/">Main</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/daily/tasks">Daily Tasks</a></li>
+                <li><a href="/yearly/tasks">Yearly Tasks</a></li>
+                <li><a href="/statistic">Statistic</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">-->
+                        <input type="submit" value="Log Out"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="col-xs-12 picture">
+                <img src="/static/images/1.jpg" width="100%">
+            </div>
+            <h2 class="add-task-header"><b>Add Daily Task</b></h2>
+            <form th:action="@{/daily/tasks}" method="post">
+                <p>
+                    <input type="text" name="text" class="dailyTask" id="text"
+                           placeholder=" Enter name of your daily task">
+                </p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="startDate">Select Start Date for task:</label><br>
+                            <input type="date" id="startDate" name="startDate" class="date-input">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="endDate">Select End date for task:</label><br>
+                            <input type="date" id="endDate" name="endDate" class="date-input">
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center">
+                    <input type="submit" value="Submit" class="submitButton"/>
+                </p>
+            </form>
+            <table class="taskTable">
+                <tr>
+                    <td class="daily-task-text"><b>Task</b></td>
+                    <td class="daily-task-start-date"><b>Start Date</b></td>
+                    <td class="daily-task-end-date"><b>End Date</b></td>
+                    <td class="daily-task-edit"><b>Edit</b></td>
+                    <td class="daily-task-delete"><b>Delete</b></td>
+                </tr>
+                <tbody th:each="task : ${dailyTasks}" th:remove="tag">
+                <tr>
+                    <td th:text="${task.text}" class="daily-task-text"></td>
+                    <td th:text="${task.startDate}"></td>
+                    <td th:text="${task.endDate}"></td>
+                    <td>
+                        <a th:href="@{/edit/daily/task/{id}(id=${task.id})}" class="edit-link">Edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/delete/daily/task}" method="post">
+                            <input type="hidden" th:value="${task.id}" name="id"/>
+                            <input type="submit" value="Delete" class="delete-button"/>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Some more stuff here -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

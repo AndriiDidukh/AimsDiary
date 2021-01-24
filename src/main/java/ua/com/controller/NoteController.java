@@ -14,18 +14,17 @@ import java.security.Principal;
 @Controller
 public class NoteController {
 
-
     @Autowired
     private NoteService noteService;
 
     @GetMapping("/notes")
-    public String main(Model model, Principal principal){
+    public String main(Model model, final Principal principal){
         model.addAttribute("note", noteService.findTodaysNoteForCurrentUser(principal));
         return "notes";
     }
 
     @PostMapping("/notes")
-    public String add(@ModelAttribute Note note, Principal principal){
+    public String add(@ModelAttribute Note note, final Principal principal){
         noteService.addTodaysNote(note, principal);
         return "redirect:/notes";
     }

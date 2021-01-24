@@ -1,17 +1,17 @@
 package ua.com.domain;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-public class Note {
+public class YearlyTask {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(columnDefinition = "TEXT")
     private String text;
-    private Date date;
+    private String year;
 
     @ManyToOne
     private User author;
@@ -32,19 +32,19 @@ public class Note {
         this.text = text;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public User getAuthor() {
         return author;
     }
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

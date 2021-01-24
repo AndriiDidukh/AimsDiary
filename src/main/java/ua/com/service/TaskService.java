@@ -41,13 +41,22 @@ public class TaskService {
     public List<Task> findTodayTaskForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
         List<Task> tasksForCurrentUser = taskRepo.findTasksForCurrentUser(user.getId());
-        return tasksForCurrentUser.stream().filter(this::filterForCurrentDate).collect(Collectors.toList());
+        List<Task> collect = new ArrayList<>();
+        try {
+            collect = tasksForCurrentUser.stream().filter(this::filterForCurrentDate).collect(Collectors.toList());
+        }catch (Exception e){}
+        return collect;
     }
 
     public List<Task> findYesterdayTasksForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
         List<Task> tasksForCurrentUser = taskRepo.findTasksForCurrentUser(user.getId());
-        return tasksForCurrentUser.stream().filter(this::filterForYesterdayDate).collect(Collectors.toList());
+
+        List<Task> collect = new ArrayList<>();
+        try {
+            collect = tasksForCurrentUser.stream().filter(this::filterForYesterdayDate).collect(Collectors.toList());
+        }catch (Exception e){}
+        return collect;
     }
 
     public void addTask(Task task,final Principal principal) {

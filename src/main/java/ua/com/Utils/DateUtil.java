@@ -37,6 +37,14 @@ public class DateUtil {
         localDate = localDate.minusDays(1);
         return DateUtil.convertLocalDateToDate(localDate);
     }
+    public static Date findTomorrowDate()
+    {
+        Date date = new Date();
+        LocalDate localDate = DateUtil.convertDateToLocalDate(date);
+        localDate = localDate.plusDays(1);
+        return DateUtil.convertLocalDateToDate(localDate);
+    }
+
 
     public static String toStringDate(final Date date) {
         return date.toString().substring(0, 10);

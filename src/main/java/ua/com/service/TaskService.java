@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -28,8 +27,7 @@ public class TaskService {
     @Autowired
     private TaskRepo taskRepo;
 
-    public Task findTaskById(final String id)
-    {
+    public Task findTaskById(final String id) {
         return taskRepo.findById(Integer.valueOf(id)).get();
     }
 
@@ -40,26 +38,19 @@ public class TaskService {
 
     public List<Task> findTodayTaskForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
-        List<Task> tasksForCurrentUser = taskRepo.findTasksForCurrentUser(user.getId());
-//        List<Task> collect = new ArrayList<>();
-//        try {
-//            collect = tasksForCurrentUser.stream().filter(this::filterForCurrentDate).collect(Collectors.toList());
-//        }catch (Exception e){}
-        return tasksForCurrentUser;
+        Date startDate = createDayDate(new Date());
+        Date endDate = createDayDate(DateUtil.findTomorrowDate());
+        return taskRepo.findTasksForCurrentUserWithDate(user.getId(), startDate, endDate);
     }
 
     public List<Task> findYesterdayTasksForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
-        List<Task> tasksForCurrentUser = taskRepo.findTasksForCurrentUser(user.getId());
-
-//        List<Task> collect = new ArrayList<>();
-//        try {
-//            collect = tasksForCurrentUser.stream().filter(this::filterForYesterdayDate).collect(Collectors.toList());
-//        }catch (Exception e){}
-        return tasksForCurrentUser;
+        Date startDate = createDayDate(DateUtil.findYesterdayDate());
+        Date endDate = createDayDate(new Date());
+        return taskRepo.findTasksForCurrentUserWithDate(user.getId(), startDate, endDate);
     }
 
-    public void addTask(Task task,final Principal principal) {
+    public void addTask(Task task, final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
         task.setDone(false);
         task.setAuthor(user);
@@ -92,14 +83,6 @@ public class TaskService {
         taskRepo.deleteById(id);
     }
 
-    private boolean filterForCurrentDate(final Task task) {
-        return DateUtil.compareDatesToTheDay(new Date(), task.getTaskDate());
-    }
-
-    private boolean filterForYesterdayDate(final Task task) {
-        return DateUtil.compareDatesToTheDay(DateUtil.findYesterdayDate(), task.getTaskDate());
-    }
-
     private List<FutureTaskDto> populateFutureTasksToDto(final List<Task> tasks) {
         List<FutureTaskDto> taskDtos = new ArrayList<>();
         for (Task task : tasks) {
@@ -125,8 +108,6 @@ public class TaskService {
         return taskDtos;
     }
 
-
-
     private Date createDayDate(final Date date) {
         SimpleDateFormat format1 = new SimpleDateFormat(DATE_FORMAT);
         String date1 = format1.format(date);
@@ -138,4 +119,5 @@ public class TaskService {
         }
         return inActiveDate;
     }
+
 }

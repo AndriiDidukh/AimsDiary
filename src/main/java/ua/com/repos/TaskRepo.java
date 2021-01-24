@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface TaskRepo extends JpaRepository<Task, Integer> {
 
+    @Query(value = "SELECT t FROM Task t WHERE t.author.id=:id AND t.taskDate >=:date1 AND t.taskDate <:date2 ORDER BY t.taskDate")
+    List<Task> findTasksForCurrentUserWithDate(@Param("id") final int id, @Param("date1") final Date startDate, @Param("date2") final Date endDate);
+
     @Query(value = "SELECT t FROM Task t WHERE t.author.id=:id ORDER BY t.taskDate")
     List<Task> findTasksForCurrentUser(@Param("id") final int id);
 

@@ -55,7 +55,7 @@ public class DailyTaskService {
         final Date endDate = dailyTask.getEndDate();
         dailyTask.setStartDate(startDate);
         dailyTask.setAuthor(user);
-        LocalDate date = LocalDate.now();
+        LocalDate date = DateUtil.convertDateToLocalDate(startDate);
         while (date.isBefore(DateUtil.convertDateToLocalDate(endDate).plusDays(DAYS_COUNT))) {
             Task task = new Task();
             task.setTaskDate(DateUtil.convertLocalDateToDate(date));

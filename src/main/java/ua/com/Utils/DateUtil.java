@@ -21,7 +21,7 @@ public class DateUtil {
 
     public static Date convertLocalDateToDate(final LocalDate localDate)
     {
-        return  Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
     public static LocalDate convertDateToLocalDate(final Date date) {

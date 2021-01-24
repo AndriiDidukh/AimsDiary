@@ -22,19 +22,13 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(Model model, final Principal principal) {
-        try {
-            model.addAttribute("yesterdayTasks", taskService.findYesterdayTasksForCurrentUser(principal));
-        }
-        catch (Exception e){
-
-        }
+        model.addAttribute("yesterdayTasks", taskService.findYesterdayTasksForCurrentUser(principal));
         model.addAttribute("todayTasks", taskService.findTodayTaskForCurrentUser(principal));
-
         return "index";
     }
 
     @PostMapping("/done")
-    public String doneTask(@RequestParam int id){
+    public String doneTask(@RequestParam int id) {
         taskService.completeTask(id);
         return "redirect:/";
     }

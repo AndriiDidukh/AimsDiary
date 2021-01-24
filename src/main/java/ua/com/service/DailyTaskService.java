@@ -51,7 +51,7 @@ public class DailyTaskService {
 
     public void addDailyTask(DailyTask dailyTask, Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
-        final Date startDate = new Date();
+        final Date startDate = dailyTask.getStartDate();
         final Date endDate = dailyTask.getEndDate();
         dailyTask.setStartDate(startDate);
         dailyTask.setAuthor(user);

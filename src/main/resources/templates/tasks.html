@@ -34,7 +34,7 @@
             <img src="/static/images/1.jpg" width="100%">
         </div>
         <h2 class="add-task-header"><b>Add Task</b></h2>
-        <form th:action="@{/tasks}" method="post">
+        <form th:action="@{/tasks}" autocomplete="off" method="post">
             <p>
                 <input type="text" name="text" class="task" id="text" placeholder=" Enter name of your task">
             </p>

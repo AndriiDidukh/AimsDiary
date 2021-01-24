@@ -34,7 +34,7 @@
             <img src="/static/images/1.jpg" width="100%">
         </div>
         <h2 class="add-task-header"><b>Edit Daily Task</b></h2>
-        <form th:action="@{/daily/tasks/edit}" method="post">
+        <form th:action="@{/daily/tasks/edit}"  method="post">
             <input type="hidden" name="id" th:value="${dailyTask.id}">
             <p>
                 <label for="text">Edit text for task:</label><br>

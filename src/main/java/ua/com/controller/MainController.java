@@ -23,12 +23,13 @@ public class MainController {
     @GetMapping("/")
     public String greeting(Model model, final Principal principal) {
         try {
-            model.addAttribute("todayTasks", taskService.findTodayTaskForCurrentUser(principal));
+            model.addAttribute("yesterdayTasks", taskService.findYesterdayTasksForCurrentUser(principal));
         }
         catch (Exception e){
 
         }
-        model.addAttribute("yesterdayTasks", taskService.findYesterdayTasksForCurrentUser(principal));
+        model.addAttribute("todayTasks", taskService.findTodayTaskForCurrentUser(principal));
+
         return "index";
     }
 

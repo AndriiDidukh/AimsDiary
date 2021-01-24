@@ -81,8 +81,8 @@ public class DailyTaskService {
 
     public void editDailyTask(final DailyTask dailyTask)
     {
-        dailyTaskRepo.save(dailyTask);
-
+//        DailyTask oldDailyTask = dailyTaskRepo.findById(dailyTask.getId()).get();
+//        dailyTaskRepo.save(dailyTask);
     }
 
 }

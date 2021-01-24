@@ -48,7 +48,6 @@ public class TaskService {
         final User user = userRepo.findByUsername(principal.getName());
         List<Task> tasksForCurrentUser = taskRepo.findTasksForCurrentUser(user.getId());
         return tasksForCurrentUser.stream().filter(this::filterForYesterdayDate).collect(Collectors.toList());
-
     }
 
     public void addTask(Task task,final Principal principal) {

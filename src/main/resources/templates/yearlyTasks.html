@@ -33,6 +33,32 @@
         <div class="col-xs-12 picture">
             <img src="/static/images/1.jpg" width="100%">
         </div>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab1" role="tab" data-toggle="tab">This Year Tasks</a>
+                </li>
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab2" role="tab" data-toggle="tab">Next Year Tasks</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <form th:action="@{/save/this/year/tasks}" method="post">
+                    <input type="hidden" name="id" th:value="${thisYearTasks.id}">
+                    <p><textarea type="text" name="text" class="note">[[${thisYearTasks?.text}]]</textarea></p>
+                    <p><input type="submit" value="Save Tasks" class="submitButton"/></p>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab2">
+                <form th:action="@{/save/next/year/tasks}" method="post">
+                    <input type="hidden" name="id" th:value="${nextYearTasks.id}">
+                    <p><textarea type="text" name="text" class="note">[[${nextYearTasks?.text}]]</textarea></p>
+                    <p><input type="submit" value="Save Tasks" class="submitButton"/></p>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Some more stuff here -->

@@ -33,12 +33,25 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @PostMapping("/tomorrow/tasks")
+    public String addTomorrowTask(@ModelAttribute Task task, final Principal principal){
+        taskService.addTomorrowTask(task, principal);
+        return "redirect:/#tab3";
+    }
+
 
     @PostMapping("/delete/task")
     public String deleteTask(@RequestParam int id)
     {
         taskService.deleteTask(id);
         return "redirect:/tasks";
+    }
+
+    @PostMapping("/delete/tommorow/task")
+    public String deleteTomorrowTask(@RequestParam int id)
+    {
+        taskService.deleteTask(id);
+        return "redirect:/#tab3";
     }
 
     @GetMapping("/edit/task/{id}")

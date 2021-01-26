@@ -37,11 +37,20 @@ public class DateUtil {
         localDate = localDate.minusDays(1);
         return DateUtil.convertLocalDateToDate(localDate);
     }
+
     public static Date findTomorrowDate()
     {
         Date date = new Date();
         LocalDate localDate = DateUtil.convertDateToLocalDate(date);
         localDate = localDate.plusDays(1);
+        return DateUtil.convertLocalDateToDate(localDate);
+    }
+
+    public static Date findAfterTomorrowDate()
+    {
+        Date date = new Date();
+        LocalDate localDate = DateUtil.convertDateToLocalDate(date);
+        localDate = localDate.plusDays(2);
         return DateUtil.convertLocalDateToDate(localDate);
     }
 

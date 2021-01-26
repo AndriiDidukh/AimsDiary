@@ -36,7 +36,7 @@ public class TaskService {
         return taskRepo.findTasksForCurrentUser(user.getId());
     }
 
-    public List<Task> findTodayTaskForCurrentUser(final Principal principal) {
+    public List<Task> findTodayTasksForCurrentUser(final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
         Date startDate = createDayDate(new Date());
         Date endDate = createDayDate(DateUtil.findTomorrowDate());
@@ -50,8 +50,24 @@ public class TaskService {
         return taskRepo.findTasksForCurrentUserWithDate(user.getId(), startDate, endDate);
     }
 
+    public List<Task> findTomorrowTasksForCurrentUser(final Principal principal) {
+        final User user = userRepo.findByUsername(principal.getName());
+        Date startDate = createDayDate(DateUtil.findTomorrowDate());
+        Date endDate = createDayDate(DateUtil.findAfterTomorrowDate());
+        return taskRepo.findTasksForCurrentUserWithDate(user.getId(), startDate, endDate);
+    }
+
     public void addTask(Task task, final Principal principal) {
         final User user = userRepo.findByUsername(principal.getName());
+        task.setDone(false);
+        task.setAuthor(user);
+        task.setDaily(false);
+        taskRepo.save(task);
+    }
+
+    public void addTomorrowTask(Task task, final Principal principal) {
+        final User user = userRepo.findByUsername(principal.getName());
+        task.setTaskDate(createDayDate(DateUtil.findTomorrowDate()));
         task.setDone(false);
         task.setAuthor(user);
         task.setDaily(false);

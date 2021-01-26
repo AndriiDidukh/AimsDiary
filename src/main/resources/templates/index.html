@@ -4,6 +4,7 @@
 <head>
     <title>Aims Diary</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
@@ -37,35 +38,18 @@
         <div class="container">
             <ul class="nav nav-pills">
                 <li class="nav-item note-select-li">
-                    <a class="nav-link note-select" href="#tab1" role="tab" data-toggle="pill">Today`s tasks</a>
+                    <a class="nav-link note-select" href="#tab1" role="tab" data-toggle="pill">Yesterday tasks</a>
                 </li>
                 <li class="nav-item note-select-li">
-                    <a class="nav-link note-select" href="#tab2" role="tab" data-toggle="pill">Yesterday tasks</a>
+                    <a class="nav-link note-select" href="#tab2" role="tab" data-toggle="pill">Today`s tasks</a>
+                </li>
+                <li class="nav-item note-select-li">
+                    <a class="nav-link note-select" href="#tab3" role="tab" data-toggle="pill">Tomorrow tasks</a>
                 </li>
             </ul>
         </div>
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="tab1">
-                <table class="main-page-table">
-                    <tr class="main-table-row">
-                        <td class="main-task-text"><b> Task</b></td>
-                        <td class="main-task-status text-center"><b>Status</b></td>
-                    </tr>
-                    <tbody th:each="task : ${todayTasks}" th:remove="tag">
-                    <tr class="main-table-row">
-                        <td th:text="${task.text}" class="main-task-text"></td>
-                        <td th:if="${task.isDone()}" class="main-task-status text-center green-yellow">Finished</td>
-                        <td th:if="${!task.isDone()}" class="main-task-status text-center">
-                            <form th:action="@{/done}" method="post">
-                                <input type="hidden" th:value="${task.id}" name="id"/>
-                                <input type="submit" value="Done" class="main-task-button"/>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="tab2">
+            <div role="tabpanel" class="tab-pane" id="tab1">
                 <table class="main-page-table">
                     <tr class="main-table-row">
                         <td class="main-task-text"><b> Task</b></td>
@@ -85,12 +69,74 @@
                     </tbody>
                 </table>
             </div>
+            <div role="tabpanel" class="tab-pane active" id="tab2">
+                <table class="main-page-table">
+                    <tr class="main-table-row">
+                        <td class="main-task-text"><b> Task</b></td>
+                        <td class="main-task-status text-center"><b>Status</b></td>
+                    </tr>
+                    <tbody th:each="task : ${todayTasks}" th:remove="tag">
+                    <tr class="main-table-row">
+                        <td th:text="${task.text}" class="main-task-text"></td>
+                        <td th:if="${task.isDone()}" class="main-task-status text-center green-yellow">Finished</td>
+                        <td th:if="${!task.isDone()}" class="main-task-status text-center">
+                            <form th:action="@{/done}" method="post">
+                                <input type="hidden" th:value="${task.id}" name="id"/>
+                                <input type="submit" value="Done" class="main-task-button"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab3">
+                <br>
+                <form th:action="@{/tomorrow/tasks}" autocomplete="off" method="post">
+                    <p>
+                        <input type="text" name="text" class="task" id="text" placeholder=" Enter name of your task">
+                    </p>
+                    <p>
+                        <input type="submit" value="Add Tomorrow Task" class="submitButton"/>
+                    </p>
+                </form>
+                <table class="main-page-table">
+                    <tr class="main-table-row">
+                        <td class="main-task-text"><b> Task</b></td>
+                        <td class="taskDelete"><b>Delete</b></td>
+                    </tr>
+                    <tbody th:each="task : ${tomorrowTasks}" th:remove="tag">
+                    <tr class="main-table-row">
+                        <td th:text="${task.text}" class="main-task-text"></td>
+                        <td class="taskDelete">
+                            <form th:action="@{/delete/tommorow/task}" method="post">
+                                <input type="hidden" th:value="${task.id}" name="id"/>
+                                <input type="submit" value="Delete" class="delete-button"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-    <!-- Some more stuff here -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    $(function(){
+        var hash = window.location.hash;
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+        });
+    });
+</script>
+<!-- Some more stuff here -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

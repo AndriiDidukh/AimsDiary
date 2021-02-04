@@ -54,7 +54,7 @@ public class TaskService {
         final User user = userRepo.findByUsername(principal.getName());
         Date startDate = createDayDate(DateUtil.findTomorrowDate());
         Date endDate = createDayDate(DateUtil.findAfterTomorrowDate());
-        return taskRepo.findTasksForCurrentUserWithDate(user.getId(), startDate, endDate);
+        return taskRepo.findTomorrowTasksForCurrentUserWithDate(user.getId(), startDate, endDate);
     }
 
     public void addTask(Task task, final Principal principal) {
